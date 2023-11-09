@@ -32,7 +32,7 @@
                 color="blue-10"
                 icon="delete"
                 @click="removeTask(task)"
-              />
+              ></q-btn>
             </q-item-section>
           </q-item>
         </q-list>
@@ -42,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+import { Notify } from 'quasar';
 import { ref } from 'vue';
 
 type TodoItem = {
@@ -58,6 +59,22 @@ const addTask = () => {
 
     if (!taskFound) {
       tasks.value.push({ text: userText.value, done: false });
+      Notify.create({
+        message: `Tarefa <strong>${userText.value}</strong> foi cadastrada com sucesso!`,
+        color: 'positive',
+        icon: 'check',
+        position: 'top-right',
+        html: true,
+      });
+      userText.value = '';
+    } else {
+      Notify.create({
+        message: `Atenção! a tarefa <strong>${userText.value}</strong> ja foi cadastrada!`,
+        color: 'warning',
+        icon: 'warning',
+        position: 'top-right',
+        html: true,
+      });
       userText.value = '';
     }
   }
