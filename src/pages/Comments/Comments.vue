@@ -1,4 +1,8 @@
 <template>
+  <q-dialog v-model="displayEdit" v-if="displayEdit">
+    <edit-comment />
+  </q-dialog>
+
   <q-table
     :title="$t('commentaries')"
     row-key="name"
@@ -27,10 +31,22 @@
         </template>
       </q-input>
     </template>
+
+    <template v-slot:body-cell-actions="props">
+      <q-td :props="props">
+        <q-btn
+          icon="mode_edit"
+          size="10px"
+          padding="6px 8px"
+          @click="onEdit(props.row)"
+        ></q-btn>
+      </q-td>
+    </template>
   </q-table>
 </template>
 
 <script setup lang="ts">
+import EditComment from './EditComment/EditComment.vue';
 import { fetchComments } from 'src/services/comments_service';
 import { Comment } from 'src/models/comment';
 import { onMounted } from 'vue';
@@ -38,10 +54,18 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { QTableProps } from 'quasar';
+import { provide } from 'vue';
+import { useCommentsStore } from 'src/stores/comments-store';
 
 const filter = ref<string>('');
-const comments = ref<Comment[]>([]);
 const loading = ref<boolean>(true);
+const displayEdit = ref<boolean>(false);
+const selectedComment = ref<Comment>({} as Comment);
+
+const commentsStore = useCommentsStore();
+const comments = computed(() => commentsStore.comments);
+
+provide('selected-comment', selectedComment);
 
 const { t } = useI18n();
 
@@ -69,7 +93,19 @@ const columns = computed<QTableProps['columns']>(() => [
     align: 'left',
     sortable: true,
   },
+  {
+    name: 'actions',
+    label: t('edit'),
+    field: 'action',
+    align: 'left',
+    sortable: false,
+  },
 ]);
+
+function onEdit(comment: Comment) {
+  displayEdit.value = true;
+  selectedComment.value = { ...comment };
+}
 
 function filterComments() {
   if (!filter.value) return comments.value;
@@ -84,9 +120,10 @@ function filterComments() {
 }
 
 onMounted(() => {
-  fetchComments().then((items) => {
+  fetchComments().then((items: Comment[]) => {
+    // timeout used to simulate slowness and highlight loading
     setTimeout(() => {
-      comments.value = items;
+      commentsStore.populateComments(items);
       loading.value = false;
     }, 500);
   });

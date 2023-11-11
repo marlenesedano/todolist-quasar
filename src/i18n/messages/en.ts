@@ -7,4 +7,7 @@ export default {
   rowsPerPageLabel: 'Rows per page',
   paginationLabel: '{first}-{last} of {total}',
   search: 'Search',
+  edit: 'Edit',
+  commentSavedMessage: 'Comment saved successfully',
+  quickAccess: 'Quick access',
 };

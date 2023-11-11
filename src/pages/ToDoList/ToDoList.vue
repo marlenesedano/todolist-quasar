@@ -59,7 +59,6 @@ const addTask = () => {
         message: `Tarefa <strong>${userText.value}</strong> foi cadastrada com sucesso!`,
         color: 'positive',
         icon: 'check',
-        position: 'top-right',
         html: true,
       });
       userText.value = '';
@@ -68,7 +67,6 @@ const addTask = () => {
         message: `Atenção! a tarefa <strong>${userText.value}</strong> ja foi cadastrada!`,
         color: 'warning',
         icon: 'warning',
-        position: 'top-right',
         html: true,
       });
       userText.value = '';

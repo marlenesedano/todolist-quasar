@@ -15,7 +15,7 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered :width="260">
       <q-list>
-        <q-item-label header>Acesso rápido</q-item-label>
+        <q-item-label header>{{ $t('quickAccess') }}</q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
