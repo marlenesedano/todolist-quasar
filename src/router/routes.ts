@@ -4,12 +4,19 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    children: [
+      { path: '', component: () => import('pages/ToDoList/ToDoList.vue') },
+    ],
   },
   {
-    path: '/to-do-list',
+    path: '/iteractive-form',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    children: [
+      {
+        path: '',
+        component: () => import('pages/IteractiveForm/IteractiveForm.vue'),
+      },
+    ],
   },
   {
     path: '/:catchAll(.*)*',

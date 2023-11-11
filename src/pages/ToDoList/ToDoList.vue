@@ -1,42 +1,40 @@
 <template>
-  <q-page>
-    <q-card>
-      <q-card-section>
-        <h1 class="q-mb-md">To-Do List</h1>
-        <q-input
-          v-model="userText"
-          @keyup.enter="addTask"
-          outlined
-          placeholder="Adicionar uma tarefa"
-        />
-      </q-card-section>
+  <q-card>
+    <q-card-section>
+      <h1 class="q-mb-md">To-Do List</h1>
+      <q-input
+        v-model="userText"
+        @keyup.enter="addTask"
+        outlined
+        placeholder="Adicionar uma tarefa"
+      />
+    </q-card-section>
 
-      <q-list bordered>
-        <q-item
-          v-for="(task, index) in tasks"
-          :key="index"
-          clickable
-          :class="{ 'done-task': task.done }"
-        >
-          <q-item-section>
-            <q-checkbox v-model="task.done" color="blue-10" />
-          </q-item-section>
-          <q-item-section class="task-text">
-            {{ task.text }}
-          </q-item-section>
-          <q-item-section side>
-            <q-btn
-              flat
-              round
-              color="blue-10"
-              icon="delete"
-              @click="removeTask(task)"
-            ></q-btn>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-card>
-  </q-page>
+    <q-list bordered>
+      <q-item
+        v-for="(task, index) in tasks"
+        :key="index"
+        clickable
+        :class="{ 'done-task': task.done }"
+      >
+        <q-item-section>
+          <q-checkbox v-model="task.done" color="blue-10" />
+        </q-item-section>
+        <q-item-section class="task-text">
+          {{ task.text }}
+        </q-item-section>
+        <q-item-section side>
+          <q-btn
+            flat
+            round
+            color="blue-10"
+            icon="delete"
+            @click="removeTask(task)"
+          ></q-btn>
+        </q-item-section>
+      </q-item>
+    </q-list>
+  </q-card>
 </template>
 
 <script setup lang="ts">
