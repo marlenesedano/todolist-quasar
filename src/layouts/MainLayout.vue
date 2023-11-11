@@ -54,7 +54,7 @@ const essentialLinks: EssentialLinkProps[] = [
     title: 'Integration API',
     caption: 'Store management',
     icon: 'settings',
-    link: '#',
+    link: '/api-integration',
   },
 ];
 

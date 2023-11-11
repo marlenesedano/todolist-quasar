@@ -1,5 +1,7 @@
-import enUS from './en-US';
+import en from './messages/en';
+import pt from './messages/pt';
 
 export default {
-  'en-US': enUS
+  'en-US': en,
+  'pt-BR': pt,
 };

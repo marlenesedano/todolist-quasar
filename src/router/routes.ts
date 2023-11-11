@@ -19,6 +19,16 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/api-integration',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Comments/Comments.vue'),
+      },
+    ],
+  },
+  {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
   },
