@@ -11,6 +11,8 @@
       (first, last, total) => t('paginationLabel', { first, last, total })
     "
     :rows-per-page-label="$t('rowsPerPageLabel')"
+    :loading="loading"
+    :loading-label="$t('loadingLabel')"
   >
   </q-table>
 </template>
@@ -25,6 +27,7 @@ import { computed } from 'vue';
 import { QTableProps } from 'quasar';
 
 const comments = ref<Comment[]>([]);
+const loading = ref<boolean>(true);
 
 const { t } = useI18n();
 
@@ -56,7 +59,10 @@ const columns = computed<QTableProps['columns']>(() => [
 
 onMounted(() => {
   fetchComments().then((items) => {
-    comments.value = items;
+    setTimeout(() => {
+      comments.value = items;
+      loading.value = false;
+    }, 500);
   });
 });
 </script>
