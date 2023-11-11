@@ -10,4 +10,7 @@ export default {
   edit: 'Editar',
   commentSavedMessage: 'Comentário salvo com sucesso',
   quickAccess: 'Acesso rápido',
+  selectLanguage: 'Selecione um idioma',
+  'en-US': 'Inglês',
+  'pt-BR': 'Português',
 };

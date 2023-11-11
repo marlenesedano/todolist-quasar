@@ -1,4 +1,6 @@
 <template>
+  <language-selector />
+
   <q-dialog v-model="displayEdit" v-if="displayEdit">
     <edit-comment />
   </q-dialog>
@@ -46,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import LanguageSelector from 'src/components/LanguageSelector.vue';
 import EditComment from './EditComment/EditComment.vue';
 import { fetchComments } from 'src/services/comments_service';
 import { Comment } from 'src/models/comment';
