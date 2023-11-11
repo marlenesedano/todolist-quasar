@@ -6,4 +6,5 @@ export default {
   loadingLabel: 'Carregando...',
   rowsPerPageLabel: 'Registros por página',
   paginationLabel: '{first}-{last} de {total}',
+  search: 'Pesquisar',
 };

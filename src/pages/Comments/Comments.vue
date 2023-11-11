@@ -2,7 +2,7 @@
   <q-table
     :title="$t('commentaries')"
     row-key="name"
-    :rows="comments"
+    :rows="filterComments()"
     :columns="columns"
     :rows-per-page-options="[5, 10, 15]"
     :pagination="pagination"
@@ -14,6 +14,19 @@
     :loading="loading"
     :loading-label="$t('loadingLabel')"
   >
+    <template v-slot:top-right>
+      <q-input
+        borderless
+        dense
+        debounce="300"
+        v-model="filter"
+        :placeholder="$t('search')"
+      >
+        <template v-slot:append>
+          <q-icon name="search" />
+        </template>
+      </q-input>
+    </template>
   </q-table>
 </template>
 
@@ -26,6 +39,7 @@ import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { QTableProps } from 'quasar';
 
+const filter = ref<string>('');
 const comments = ref<Comment[]>([]);
 const loading = ref<boolean>(true);
 
@@ -56,6 +70,18 @@ const columns = computed<QTableProps['columns']>(() => [
     sortable: true,
   },
 ]);
+
+function filterComments() {
+  if (!filter.value) return comments.value;
+
+  return comments.value.filter((comment) => {
+    return Object.values(comment).some((fieldValue) => {
+      return typeof fieldValue === 'string'
+        ? fieldValue.toLowerCase().includes(filter.value)
+        : false;
+    });
+  });
+}
 
 onMounted(() => {
   fetchComments().then((items) => {
