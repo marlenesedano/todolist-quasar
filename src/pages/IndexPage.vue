@@ -25,11 +25,13 @@
 
     <q-page-container>
       <router-view />
-      <ToDoList />
+      <!-- <ToDoList /> -->
+      <IteractiveForm />
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup lang="ts">
-import ToDoList from '../components/ToDoList/ToDoList.vue';
+import IteractiveForm from 'src/components/IteractiveForm/IteractiveForm.vue';
+// import ToDoList from '../components/ToDoList/ToDoList.vue';
 </script>
