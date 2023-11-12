@@ -18,6 +18,7 @@ Este repositório é sobre um projeto dividido em três partes.
 - [typescript](https://www.typescriptlang.org/)
 - [Pinia](https://pinia.vuejs.org/)
 - [Quasar](https://quasar.dev/)
+- [Zod](https://zod.dev/)
 
 ## Instal Yarn
 
@@ -59,8 +60,14 @@ yarn quasar dev
 
 **Formulário interativo**
 
-- Um formulário temático dedicado ao cadastro de planos de streaming, está dividido em três etapas, onde é necessário preencher informações em cada uma delas. A última etapa oferece um resumo com os dados preenchidos nas etapas anteriores. Devido ao fato de todos os estados serem definidos previamente e utilizados como referências, a inclusão do TypeScript não foi necessária.
+- Um formulário temático dedicado ao cadastro de planos de streaming, está dividido em três etapas, onde é necessário preencher informações em cada uma delas, possuindo validação com a lib Zod nos campos de e-mail e telefone. A última etapa oferece um resumo com os dados preenchidos nas etapas anteriores. Devido ao fato de todos os estados serem definidos previamente e utilizados como referências, a inclusão do TypeScript não foi necessária.
 
-![Descrição do Gif](./src/assets/gif/form.gif)
+![Form](./src/assets/gif/form.gif)
 
 **Integração com a API**
+
+- Nesta tarefa, foi efetuada uma requisição na API do jsonplaceholder para obter comentários e salvá-los em uma store do Pinia. Em seguida, esses comentários foram exibidos em uma tabela que oferece funcionalidades como filtro, ordenação, paginação, loading, edição e tradução para os idiomas Português e Inglês. Durante o processo de edição, as alterações realizadas são automaticamente atualizadas na store.
+
+![Fluxograma](./src/assets/png/fluxoApi.png)
+
+![Form](./src/assets/gif/api-store.gif)

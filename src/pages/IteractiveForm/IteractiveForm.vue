@@ -8,7 +8,7 @@
           class="input-form"
           outlined
           v-model="formData.name"
-          label="Ex Marlene"
+          placeholder="Nome"
           required
         />
         <br />
