@@ -1,14 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <!-- <q-btn
-      label="Reset"
-      push
-      color="white"
-      text-color="primary"
-      @click="reset"
-      class="q-mb-md"
-    /> -->
-
+    <div class="text-h5 q-mb-lg">Cadastro de planos streaming</div>
     <q-stepper v-model="step" header-nav ref="stepper" color="primary" animated>
       <q-step :name="1" title="Informe seus dados" icon="info" :done="done1">
         <label for="nome">Primeiro nome</label>
@@ -50,30 +42,23 @@
         <div class="types-plan">
           <div class="plan">
             <div class="plan__content">
-              <!-- <div class="q-pa-md">
-              <q-checkbox v-model="service" />
-            </div> -->
-
               <div class="plan__description">
                 <span class="plan__description-title">Plano Prata</span>
                 <ul>
-                  <li>Acesso premium sem anúncios</li>
+                  <li>Acesso premium com anúncios</li>
                   <li>Funcionalidades avançadas</li>
-                  <li>Suporte prioritário por e-mail, chat e telefone</li>
+                  <li>Suporte por e-mail</li>
                 </ul>
               </div>
               <span class="plan__value">R$ 50,00/Mês</span>
             </div>
 
             <div class="plan__content">
-              <!-- <div class="q-pa-md">
-              <q-checkbox v-model="storage" />
-            </div> -->
               <div class="plan__description">
                 <span class="plan__description-title">Plano Bronze</span>
                 <ul>
                   <li>Acesso exclusivo sem anúncios.</li>
-                  <li>Suporte 24/7 por e-mail, chat e telefone</li>
+                  <li>Suporte 24/7 por e-mail, chat</li>
                   <li>Suporte por e-mail e chat</li>
                 </ul>
               </div>
@@ -81,15 +66,12 @@
             </div>
 
             <div class="plan__content">
-              <!-- <div class="q-pa-md">
-              <q-checkbox v-model="customizeProfile" />
-            </div> -->
               <div class="plan__description">
                 <span class="plan__description-title">Plano Ouro</span>
                 <ul>
                   <li>Suporte personalizado para questões familiares.</li>
                   <li>Acesso para equipes pequenas</li>
-                  <li>Suporte por e-mail e chat</li>
+                  <li>Suporte por e-mail,chat e WhatsApp</li>
                 </ul>
               </div>
               <span class="plan__value">R$ 200,00/Mês</span>
@@ -133,7 +115,7 @@
           <p v-if="name">Nome: {{ name }}</p>
           <p v-if="email">Email: {{ email }}</p>
           <p v-if="phone">Telefone: {{ phone }}</p>
-          <p v-if="group">Plano escolhido: {{ group }}</p>
+          <p v-if="group != 'op1'">Plano escolhido: {{ group }}</p>
         </div>
 
         <q-stepper-navigation>
@@ -144,14 +126,14 @@
             label="Voltar"
             class="q-ml-sm"
           />
-          <q-btn color="primary" @click="done3 = true" label="Finish" />
+          <q-btn color="primary" @click="done3 = true" label="Finalizar" />
         </q-stepper-navigation>
       </q-step>
     </q-stepper>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 
 const step = ref(1);
@@ -167,15 +149,15 @@ const group = ref('op1');
 const options = ref([
   {
     label: 'Bronze',
-    value: 'Bronze',
+    value: 'Bronze , Valor: R$ 50,00/Mês',
   },
   {
     label: 'Prata',
-    value: 'Prata',
+    value: 'Prata, Valor: R$ 150,00/Mês',
   },
   {
     label: 'Ouro',
-    value: 'Ouro',
+    value: 'Ouro , Valor: R$ 200,00/Mês',
   },
 ]);
 

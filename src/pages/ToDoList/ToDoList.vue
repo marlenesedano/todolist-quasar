@@ -1,12 +1,13 @@
 <template>
   <q-card>
     <q-card-section>
-      <h1 class="q-mb-md">To-Do List</h1>
+      <div class="text-h4 q-mb-lg">To-Do List</div>
+
       <q-input
         v-model="userText"
         @keyup.enter="addTask"
         outlined
-        placeholder="Adicionar uma tarefa"
+        placeholder="Descreva a tarefa e pressione a tecla enter"
       />
     </q-card-section>
 
@@ -20,7 +21,7 @@
         <q-item-section>
           <q-checkbox v-model="task.done" color="blue-10" />
         </q-item-section>
-        <q-item-section class="task-text">
+        <q-item-section class="task-text" @click="onClickItem(task)">
           {{ task.text }}
         </q-item-section>
         <q-item-section side>
@@ -48,6 +49,10 @@ type TodoItem = {
 
 const userText = ref<string | undefined>();
 const tasks = ref<TodoItem[]>([]);
+
+function onClickItem(task: TodoItem) {
+  task.done = !task.done;
+}
 
 const addTask = () => {
   if (userText.value?.trim()) {
