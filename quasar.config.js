@@ -104,6 +104,20 @@ module.exports = configure(function (/* ctx */) {
           position: 'top-right',
           group: false,
         },
+        //New Theme
+        brand: {
+          primary: '#470e78',
+          secondary: '#6e44b8',
+          accent: '#9C27B0',
+
+          dark: '#1d1d1d',
+          'dark-page': '#121212',
+
+          positive: '#21BA45',
+          negative: '#730511',
+          info: '#18409e',
+          warning: '#F2C037',
+        },
       },
 
       // iconSet: 'material-icons', // Quasar icon set

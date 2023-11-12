@@ -19,7 +19,7 @@
         :class="{ 'done-task': task.done }"
       >
         <q-item-section>
-          <q-checkbox v-model="task.done" color="blue-10" />
+          <q-checkbox v-model="task.done" color="primary" />
         </q-item-section>
         <q-item-section class="task-text" @click="onClickItem(task)">
           {{ task.text }}
@@ -28,7 +28,7 @@
           <q-btn
             flat
             round
-            color="blue-10"
+            color="primary"
             icon="delete"
             @click="removeTask(task)"
           ></q-btn>
