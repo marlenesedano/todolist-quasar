@@ -50,3 +50,17 @@ npm install
 ```bash
 yarn quasar dev
 ```
+
+**To-do List**
+
+- Uma lista de tarefas to-do list onde o usuário pode cadastrar suas tarefas e marcá-las como concluídas, com notificação de itens cadastrados, e também com uma tratativa para não permitir que o usuário cadastre duas vezes a mesma tarefa.
+
+![Descrição do Gif](./src/assets/gif/todo-list.gif)
+
+**Formulário interativo**
+
+- Um formulário temático dedicado ao cadastro de planos de streaming, está dividido em três etapas, onde é necessário preencher informações em cada uma delas. A última etapa oferece um resumo com os dados preenchidos nas etapas anteriores. Devido ao fato de todos os estados serem definidos previamente e utilizados como referências, a inclusão do TypeScript não foi necessária.
+
+![Descrição do Gif](./src/assets/gif/form.gif)
+
+**Integração com a API**

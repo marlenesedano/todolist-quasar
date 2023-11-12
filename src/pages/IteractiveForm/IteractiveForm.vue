@@ -7,26 +7,44 @@
         <q-input
           class="input-form"
           outlined
-          v-model="name"
+          v-model="formData.name"
           label="Ex Marlene"
           required
         />
         <br />
         <label for="email">Endereço de email</label>
-        <q-input outlined v-model="email" label="Ex marlene@gmail" required />
+        <q-input
+          outlined
+          v-model="formData.email"
+          placeholder="example@email.com"
+          required
+          :bottom-slots="!!errors['email']"
+          :error="errors['email'] ? true : undefined"
+        >
+          <template v-slot:error>
+            <div id="error-alert">E-mail inválido</div>
+          </template>
+        </q-input>
         <br />
         <label for="phone">Numero de telefone</label>
-        <q-input outlined v-model="phone" label="Ex (99)9999-9999" required />
+        <q-input
+          outlined
+          v-model="formData.phone"
+          required
+          mask="(##) #####-####"
+          placeholder="(99) 99999-9999"
+          :bottom-slots="!!errors['phone']"
+          :error="errors['phone'] ? true : undefined"
+        >
+          <template v-slot:error>
+            <div id="error-alert">Telefone inválido</div>
+          </template>
+        </q-input>
 
         <q-stepper-navigation>
           <q-btn
             :disable="isNextDisabled"
-            @click="
-              () => {
-                done1 = true;
-                step = 2;
-              }
-            "
+            @click="onContinueToSecondStep"
             color="primary"
             label="Continue"
           />
@@ -112,9 +130,9 @@
       <q-step :name="3" title="Resumo" icon="add_comment" :done="done3">
         <div class="resume">
           <h2 class="resume__title">Informações dos dados e plano</h2>
-          <p v-if="name">Nome: {{ name }}</p>
-          <p v-if="email">Email: {{ email }}</p>
-          <p v-if="phone">Telefone: {{ phone }}</p>
+          <p v-if="formData.name">Nome: {{ formData.name }}</p>
+          <p v-if="formData.email">Email: {{ formData.email }}</p>
+          <p v-if="formData.phone">Telefone: {{ formData.phone }}</p>
           <p v-if="group != 'op1'">Plano escolhido: {{ group }}</p>
         </div>
 
@@ -135,15 +153,15 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { z, ZodError } from 'zod';
 
 const step = ref(1);
 const done1 = ref(false);
 const done2 = ref(false);
 const done3 = ref(false);
 
-const name = ref('');
-const email = ref('');
-const phone = ref('');
+const errors = ref<Record<string, string>>({});
+const formData = ref({ name: '', email: '', phone: '' });
 
 const group = ref('op1');
 const options = ref([
@@ -161,13 +179,40 @@ const options = ref([
   },
 ]);
 
+const schema = z.object({
+  email: z.string().email(),
+  phone: z.string().min(15),
+});
+
+function validateForm() {
+  try {
+    errors.value = {};
+    schema.parse(formData.value);
+  } catch (error) {
+    if (error instanceof ZodError) {
+      error.errors.forEach((error) => {
+        errors.value[error.path.join('.')] = error.message;
+      });
+    }
+  }
+}
+
 const isNextDisabled = computed(() => {
-  return !(name.value && email.value && phone.value);
+  return !(formData.value.name && formData.value.email && formData.value.phone);
 });
 
 const isNextDisabledPlan = computed(() => {
   return group.value === 'op1';
 });
+
+function onContinueToSecondStep() {
+  validateForm();
+
+  if (Object.keys(errors.value).length === 0) {
+    done1.value = true;
+    step.value = 2;
+  }
+}
 </script>
 
 <style scoped>
